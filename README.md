@@ -101,6 +101,7 @@ energy-consumption-project/
 |   |-- silver.py
 |   |-- process.py
 |   |-- check_bronze.py
+|   |-- dashboard.py
 |   \-- predict.py
 |-- reports/
 |-- docs/
@@ -126,6 +127,10 @@ Reports saved in `reports/`:
 - `top_peak_days.csv` - top 10 peak days
 - `layer_counts.txt` - row counts per layer
 - `prediction_plot.png` - actual vs predicted   chart
+- `model_metrics.txt` - MAE, RMSE
+- `feature_importance.txt` - top predictors
+- `dashboard.png` - 6-panel consumption dashboard
+- `prediction_plot.png` - actual vs predicted
 - `model_metrics.txt` - MAE, RMSE
 - `feature_importance.txt` - top predictors
 
