@@ -22,7 +22,7 @@ historical analysis and short-term demand prediction to plan resources.
 - Cleaned, validated dataset with 2M+ records.
 - Identification of peak-demand hours and seasonal patterns.
 - Reports and visualizations for decision-making.
-
+- A demand prediction model with MAE and RMSE metrics.
 ## 3. Dataset
 UCI Individual Household Electric Power Consumption
 - Source: https://archive.ics.uci.edu/dataset/235/individual+household+electric+power+consumption
@@ -84,6 +84,7 @@ python src\ingest.py
 python src\silver.py
 python src\process.py
 python src\verify.py
+python src\predict.py
 ```
 
 ## 10. Project Structure
@@ -99,7 +100,8 @@ energy-consumption-project/
 |   |-- ingest.py
 |   |-- silver.py
 |   |-- process.py
-|   \-- check_bronze.py
+|   |-- check_bronze.py
+|   \-- predict.py
 |-- reports/
 |-- docs/
 |-- requirements.txt
@@ -115,13 +117,17 @@ energy-consumption-project/
 - Single household, not a full grid.
 - Minute gaps exist after quarantine.
 - Weather data not included.
-- Future work: demand prediction model can be added using lag features.
+- Prediction accuracy limited to one household.
+- Weather data not included as a predictor..
 
 ## 13. Outputs
 Reports saved in `reports/`:
 - `hourly_profile.csv` - 24-hour consumption curve
 - `top_peak_days.csv` - top 10 peak days
 - `layer_counts.txt` - row counts per layer
+- `prediction_plot.png` - actual vs predicted   chart
+- `model_metrics.txt` - MAE, RMSE
+- `feature_importance.txt` - top predictors
 
 ## 14. Architecture Diagram
 ```

@@ -1,0 +1,7 @@
+Demand Prediction Model — Random Forest
+=============================================
+Features: ['hour', 'day_of_week', 'month', 'lag_1h', 'lag_24h', 'rolling_avg_24h']
+Train rows: 27315
+Test rows:  6829
+MAE:  0.3314 kW
+RMSE: 0.4777 kW

@@ -1,0 +1,8 @@
+Feature Importance
+==============================
+lag_1h: 0.7023
+hour: 0.1193
+rolling_avg_24h: 0.0688
+lag_24h: 0.0645
+day_of_week: 0.0265
+month: 0.0185
