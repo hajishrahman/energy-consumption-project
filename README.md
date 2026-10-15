@@ -87,6 +87,7 @@ python src\verify.py
 ```
 
 ## 10. Project Structure
+```
 energy-consumption-project/
 |-- data/
 |   |-- raw/
@@ -103,6 +104,7 @@ energy-consumption-project/
 |-- docs/
 |-- requirements.txt
 \-- README.md
+```
 
 ## 11. Tools Used
 - Python 3.12, PySpark 3.5.0, Java 17
@@ -122,6 +124,7 @@ Reports saved in `reports/`:
 - `layer_counts.txt` - row counts per layer
 
 ## 14. Architecture Diagram
+```
 +-------------+
 |  raw .txt   |  UCI dataset (2M rows)
 +------+------+
@@ -141,5 +144,5 @@ Reports saved in `reports/`:
 +---------------------+
 |  GOLD (parquet)     |  hourly, daily, window features
 +---------------------+
-
+```
 
