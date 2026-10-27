@@ -148,25 +148,36 @@ Reports saved in `reports/`:
 - `dashboard.png` - 6-panel consumption dashboard
 
 ## 14. Architecture Diagram
-```
+
+```text
 +-------------+
-|  raw .txt   |  UCI dataset (2M rows)
+|  raw .txt   |  UCI dataset (2,075,259 rows)
 +------+------+
        | read
        v
 +---------------------+
-|  BRONZE (parquet)   |  raw strings + metadata
+|  BRONZE (parquet)   |  Raw strings + ingestion metadata
 +------+--------------+
-       | clean, cast, timestamp
+       | clean, cast, timestamp, split
        v
 +---------------------+
-|  SILVER (parquet)   |  typed, feature-engineered
-|  + QUARANTINE       |  25,979 bad rows
+|  SILVER (parquet)   |  Typed, feature-engineered
+|  + QUARANTINE       |  25,979 bad rows isolated
 +------+--------------+
        | filter, agg, SQL, window, join
        v
 +---------------------+
-|  GOLD (parquet)     |  hourly, daily, window features
+|  GOLD (parquet)     |  Hourly & Daily summaries
++------+--------------+
+       | train Random Forest
+       v
 +---------------------+
-```
+|  ML MODEL           |  Demand Prediction (MAE 0.33)
++------+--------------+
+       | serve results
+       v
++---------------------+
+|  STREAMLIT APP      |  Interactive Dashboard
+|  + MATPLOTLIB PNG   |  Static Reports
++---------------------+
 
