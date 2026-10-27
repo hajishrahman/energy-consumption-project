@@ -75,36 +75,49 @@ Silver (cleaned), Gold (aggregated). Data flows from the raw UCI text file throu
 - Highest single peak: **2009-02-22** (11.122 kW)
 
 ## 9. How to Run
+
+### Option 1: Automated Pipeline (Recommended)
+Runs the entire pipeline (Ingest → Silver → Process → Predict → Dashboard) in the correct order without needing Airflow locally.
+
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
+python run_all.py
+```
+### Option 2: Interactive Dashboard Only
+To view the interactive Streamlit dashboard:
+streamlit run src/streamlit_app.py
+### Option 3: Apache Airflow (Docker)
+The repository includes a fully configured Airflow DAG at dags/energy_pipeline.py. If you have Docker installed, you can start the local Airflow server to view the DAG orchestration:
 
-python src\ingest.py
-python src\silver.py
-python src\process.py
-python src\verify.py
-python src\predict.py
+```bash
+docker compose up -d
+# Open http://localhost:8080 (Username: airflow, Password: airflow)
 ```
 
 ## 10. Project Structure
 ```
 energy-consumption-project/
+|-- dags/
+|-- energy_pipeline.py #Airflow DAG defination
 |-- data/
-|   |-- raw/
-|   |-- bronze/power_consumption/
-|   |-- silver/power_consumption/
-|   |-- silver/quarantine/
-|   \-- gold/{hourly_summary,daily_summary,window_features}/
+||-- raw/
+||-- bronze/power_consumption/
+||-- silver/power_consumption/
+||-- silver/quarantine/
+||-- gold/{hourly_summary,daily_summary,window_features}/
 |-- src/
-|   |-- ingest.py
-|   |-- silver.py
-|   |-- process.py
-|   |-- check_bronze.py
-|   |-- dashboard.py
-|   \-- predict.py
+||-- ingest.py
+||-- silver.py
+||-- process.py
+||-- predict.py
+||-- dashboard.py
+||-- steamlit_app.py #interactive dashboard
+|--verify.py
 |-- reports/
-|-- docs/
+|--run_all.py #pipeline runner script
+|-- docker-compose.yaml # airflow docker configuration
 |-- requirements.txt
 \-- README.md
 ```
@@ -112,27 +125,26 @@ energy-consumption-project/
 ## 11. Tools Used
 - Python 3.12, PySpark 3.5.0, Java 17
 - Parquet + Medallion architecture
+- Apache Airflow (Docker) for orchestration
+- Streamlit for interactive dashboarding
+- Scikit-Learn for machine learning
 - VS Code, Windows 11
 
 ## 12. Limitations
 - Single household, not a full grid.
 - Minute gaps exist after quarantine.
-- Weather data not included.
+- Weather data not included as a predictor.
 - Prediction accuracy limited to one household.
-- Weather data not included as a predictor..
 
 ## 13. Outputs
 Reports saved in `reports/`:
 - `hourly_profile.csv` - 24-hour consumption curve
 - `top_peak_days.csv` - top 10 peak days
 - `layer_counts.txt` - row counts per layer
-- `prediction_plot.png` - actual vs predicted   chart
+- `prediction_plot.png` - actual vs predicted chart
 - `model_metrics.txt` - MAE, RMSE
 - `feature_importance.txt` - top predictors
 - `dashboard.png` - 6-panel consumption dashboard
-- `prediction_plot.png` - actual vs predicted
-- `model_metrics.txt` - MAE, RMSE
-- `feature_importance.txt` - top predictors
 
 ## 14. Architecture Diagram
 ```
