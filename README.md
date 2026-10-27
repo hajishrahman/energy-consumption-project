@@ -90,11 +90,12 @@ To view the interactive Streamlit dashboard:
 streamlit run src/streamlit_app.py
 ### Option 3: Apache Airflow (Docker)
 The repository includes a fully configured Airflow DAG at dags/energy_pipeline.py. If you have Docker installed, you can start the local Airflow server to view the DAG orchestration:
-
 ```bash
 docker compose up -d
 # Open http://localhost:8080 (Username: airflow, Password: airflow)
 ```
+### Option 4: Google Colab (Cloud Execution)
+For cloud execution without local setup, open `notebooks/Energy_Pipeline_Colab.ipynb` in Google Colab. It installs PySpark, downloads the UCI dataset, and runs the full pipeline in ~10 minutes.
 
 ## 10. Project Structure
 ```
